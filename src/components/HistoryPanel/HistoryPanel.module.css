@@ -1,0 +1,224 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background:
+    linear-gradient(135deg, rgba(60, 50, 40, 0.8) 0%, rgba(80, 60, 45, 0.8) 100%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 180, 80, 0.03) 2px,
+      rgba(255, 180, 80, 0.03) 4px
+    );
+  border: 3px solid rgba(200, 150, 100, 0.4);
+  border-radius: 12px;
+  padding: 0.75rem;
+  box-shadow:
+    0 0 30px rgba(255, 180, 80, 0.2),
+    inset 0 0 30px rgba(255, 200, 120, 0.1),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(255, 180, 80, 0.05) 50%, transparent 100%),
+    radial-gradient(circle at 50% 50%, rgba(255, 200, 120, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.header {
+  flex-shrink: 0;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid rgba(200, 150, 100, 0.4);
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgba(255, 200, 120, 1);
+  text-align: center;
+  text-shadow: 0 0 10px rgba(255, 180, 80, 0.4);
+  letter-spacing: 0.5px;
+}
+
+.entries {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 0;
+}
+
+.entries::-webkit-scrollbar {
+  width: 8px;
+}
+
+.entries::-webkit-scrollbar-track {
+  background: rgba(30, 25, 20, 0.5);
+  border-radius: 4px;
+}
+
+.entries::-webkit-scrollbar-thumb {
+  background: rgba(200, 150, 100, 0.4);
+  border-radius: 4px;
+}
+
+.entries::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 180, 80, 0.6);
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem;
+  background: rgba(30, 25, 20, 0.7);
+  border: 2px solid rgba(200, 150, 100, 0.4);
+  border-radius: 8px;
+  flex-shrink: 0;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.entry::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 180, 80, 0.05) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.entry:hover {
+  border-color: rgba(255, 180, 80, 0.6);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 180, 80, 0.2);
+  transform: translateY(-1px);
+}
+
+.entry:hover::before {
+  opacity: 1;
+}
+
+.graphPreview {
+  width: 72px;
+  height: 55px;
+  background: rgba(20, 15, 10, 0.8);
+  border-radius: 6px;
+  border: 1.5px solid rgba(200, 150, 100, 0.4);
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.4),
+    0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s;
+  pointer-events: none;
+}
+
+.entry:hover .graphPreview {
+  border-color: rgba(255, 180, 80, 0.5);
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(255, 180, 80, 0.3);
+}
+
+.graphPreview :global(.react-flow) {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.graphPreview :global(.react-flow__container) {
+  min-height: 0 !important;
+}
+
+.graphPreview :global(.react-flow__attribution) {
+  display: none !important;
+}
+
+.graphPreview :global(.react-flow__background) {
+  display: none !important;
+}
+
+.graphPreview :global(.react-flow__viewport) {
+  pointer-events: none;
+}
+
+.graphPreview :global(.react-flow__node) {
+  pointer-events: none;
+}
+
+.graphPreview :global(.react-flow__edge) {
+  pointer-events: none;
+}
+
+.graphPreview > div {
+  min-height: 0 !important;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+}
+
+.operationSymbol {
+  font-size: 1.2rem;
+  color: rgba(255, 200, 120, 1);
+  font-weight: bold;
+  flex-shrink: 0;
+  min-width: 1.2rem;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(255, 180, 80, 0.6);
+  transition: all 0.2s;
+}
+
+.entry:hover .operationSymbol {
+  color: rgba(255, 220, 140, 1);
+  text-shadow: 0 0 12px rgba(255, 180, 80, 0.8);
+  transform: scale(1.1);
+}
+
+.equalsSign {
+  font-size: 1.4rem;
+  color: rgba(255, 200, 120, 0.8);
+  font-weight: bold;
+  flex-shrink: 0;
+  min-width: 1.2rem;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.entry:hover .equalsSign {
+  color: rgba(255, 200, 120, 1);
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: rgba(200, 150, 100, 0.7);
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 2rem;
+  text-align: center;
+}

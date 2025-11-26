@@ -1,0 +1,513 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{acknowledgement}{Acknowledgement}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{axiom}{Axiom}
+\newtheorem{case}{Case}
+\newtheorem{claim}{Claim}
+\newtheorem{conclusion}{Conclusion}
+\newtheorem{condition}{Condition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{corollary}{Corollary}
+\newtheorem{criterion}{Criterion}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+\newtheorem{lemma}{Lemma}
+\newtheorem{notation}{Notation}
+\newtheorem{problem}{Problem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{solution}{Solution}
+\newtheorem{summary}{Summary}
+\newtheorem{theorem}{Theorem}
+
+
+\newcommand{\fancy}[1]{\mathcal{#1}}
+\newcommand{\C}[1]{\fancy{C}_{#1}}
+
+
+\newcommand{\IN}{\mathbb{N}}
+\newcommand{\IZ}{\mathbb{Z}}
+\newcommand{\IR}{\mathbb{R}}
+\newcommand{\G}{\fancy{G}}
+\newcommand{\CC}{\fancy{C}}
+\newcommand{\D}{\fancy{D}}
+\newcommand{\T}{\fancy{T}}
+\newcommand{\B}{\fancy{B}}
+\renewcommand{\L}{\fancy{L}}
+\newcommand{\HH}{\fancy{H}}
+
+\newcommand{\inj}{\hookrightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\setb}[3]{\left\{ #1 \in #2 : #3 \right\}}
+\newcommand{\setbs}[2]{\left\{ #1 : #2 \right\}}
+\newcommand{\card}[1]{\left|#1\right|}
+\newcommand{\size}[1]{\left\Vert#1\right\Vert}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\func}[3]{#1\colon #2 \rightarrow #3}
+\newcommand{\funcinj}[3]{#1\colon #2 \inj #3}
+\newcommand{\funcsurj}[3]{#1\colon #2 \surj #3}
+\newcommand{\irange}[1]{\left[#1\right]}
+\newcommand{\join}[2]{#1 \mbox{\hspace{2 pt}$\ast$\hspace{2 pt}} #2}
+\newcommand{\djunion}[2]{#1 \mbox{\hspace{2 pt}$+$\hspace{2 pt}} #2}
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\DefinedAs}{\mathrel{\mathop:}=}
+
+\newcommand{\mic}{\operatorname{mic}}
+\newcommand{\AT}{\operatorname{AT}}
+\newcommand{\col}{\operatorname{col}}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\nonsep}{\bar{S}}
+\newcommand{\type}{\operatorname{type}}
+\def\adj{\leftrightarrow}
+\def\nonadj{\not\!\leftrightarrow}
+\newcommand{\gcd}{\operatorname{gcd}}
+
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \vphantom{\big|} % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}
+
+\def\D{\fancy{D}}
+\def\C{\fancy{C}}
+\def\A{\fancy{A}}
+
+\newcommand{\claim}[2]{{\bf Claim #1.}~{\it #2}~~}
+\newcommand{\case}[2]{{\bf Case #1.}~{\it #2}~~}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\def\gcd{\bigtriangledown}
+\def\lcm{\bigtriangleup}
+\def\no{\natural}
+
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+\newcommand{\Bond}[6]%
+% start, end, thickness, incolor, outcolor, iterations
+{ \begin{pgfonlayer}{background}
+        \colorlet{InColor}{#4}
+        \colorlet{OutColor}{#5}
+        \foreach \I in {#6,...,1}
+        {   \pgfmathsetlengthmacro{\r}{#3/#6*\I}
+            \pgfmathsetmacro{\C}{sqrt(1-\r*\r/#3/#3)*100}
+            \draw[InColor!\C!OutColor, line width=\r] (#1.center) -- (#2.center);
+        }
+    \end{pgfonlayer}
+}
+
+\newcommand{\BlackBond}[2]%
+% start, end
+{   \Bond{#1}{#2}{0.7071mm}{black!25}{black!25!black}{10}
+}
+
+\title{Finding structure in a meditative state}
+\author{Bas Rasmussen\thanks{ztasnelletsllun@gmail.com}}
+\begin{document}
+\maketitle
+I have been experimenting with meditation for a long time, but just recently I seem to have come across another being in there.  It may just be me looking at me, but whatever it is, it is
+showing me some really interesting arrangements of colored balls.  At first, I thought it was just random colors and shapes, but it became very ordered.  It was like this being (me?)
+was trying to talk to me but couldn't, so was showing me some math in pictures.   I have gone in many times now and am trying to write things down here.  Has anyone else
+ever seen this?  My best guess so far is he is showing me a machine that might be useful to rapidly factor integers.  I detail this in the analysis below.  There is a lot of extra structure
+that I am currently disregarding, but is probably also something interesting.  I will report more when I know more.
+
+\section{Early encounters}
+\begin{figure}
+\centering
+\begin{tikzpicture}
+[   AA/.style={circle, ball color=gray!75, minimum size=16mm, inner sep=0},
+]
+   \node[AA] (A1) at (0,0) {};
+\end{tikzpicture}
+\caption{The white ball.}
+\end{figure}
+
+I saw objects sort of like molecules, balls of different colors joined by bars.   Pairs of objects were placed in
+some kind of machine with four buttons, labeled $\star, \lcm, \gcd$ and $\dagger$.  After the pressing one of the buttons the original
+objects were gone, replaced by a new object.  He showed me many demonstrations of this, pressing different buttons, with differently colored balls coming out
+connected in various ways.  It was clear that he was trying to show me what this machine did, the look on his face said ``you see, yes?''  I tried to write down as much
+as I could afterwards, hoping that he would show me more next time.  The colors definitely have meaning, there is a structure there.  Two white balls
+make a red ball when you push $\dagger$ and a red and white ball make a blue ball when you push $\dagger$ (whether you put white in the first or second slot
+does not appear to matter).  He showed me a few with the $\star$ button as well.  A red and blue ball with $\star$ makes just joins the balls by a black bar.  
+\begin{figure}
+\centering
+\begin{tikzpicture}
+[   AA/.style={circle, ball color=gray!75, minimum size=16mm, inner sep=0},
+	BB/.style={circle, ball color=red!75, minimum size=16mm, inner sep=0},
+]
+    \node[AA] (A1) at (0,0) {};
+	\node at (1.5,0) {\huge $\dagger$};
+	\node[AA] (A2) at (3,0) {};
+	\node at (4.5,0) {\huge $=$};
+	\node[BB] (B1) at (6,0) {};
+\end{tikzpicture}
+\caption{Two white balls in the machine produced a red ball when the $\dagger$ button was pressed.}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+[   AA/.style={circle, ball color=gray!75, minimum size=16mm, inner sep=0},
+	BB/.style={circle, ball color=red!75, minimum size=16mm, inner sep=0},
+	CC/.style={circle, ball color=blue!75, minimum size=16mm, inner sep=0},
+]
+    \node[AA] (A1) at (0,0) {};
+	\node at (1.5,0) {\huge $\dagger$};
+	\node[BB] (A2) at (3,0) {};
+	\node at (4.5,0) {\huge $=$};
+	\node[CC] (B1) at (6,0) {};
+\end{tikzpicture}
+\caption{A white and a red ball in the machine produced a blue ball when the $\dagger$ button was pressed.}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+[   AA/.style={circle, ball color=red!75, minimum size=10mm, inner sep=0},
+BB/.style={circle, ball color=blue!75, minimum size=10mm, inner sep=0},
+CC/.style={circle, ball color=gray!75, minimum size=10mm, inner sep=0}
+]
+    \node[AA] (A1) at (0,0) {};
+	\node at (1,0) {\huge $\star$};
+	\node[BB] (A2) at (2,0) {};
+	\node at (3,0) {\huge $=$};
+	\node[AA] (A3) at (4,0) {};
+	\node[BB] (A4) at (6,0) {};
+	\BlackBond{A3}{A4}
+	
+	\begin{scope}[shift = {(8,0)}]
+	\node[AA] (A1) at (0,0) {};
+	\node at (1,0) {\huge $\star$};
+	\node[CC] (A2) at (2,0) {};
+	\node at (3,0) {\huge $=$};
+	\node[AA] (A3) at (4,0) {};
+	\end{scope}
+	
+	\begin{scope}[shift = {(8,-3)}]
+	\node[BB] (A1) at (0,0) {};
+	\node at (1,0) {\huge $\star$};
+	\node[CC] (A2) at (2,0) {};
+	\node at (3,0) {\huge $=$};
+	\node[BB] (A3) at (4,0) {};
+	\end{scope}
+	
+	\begin{scope}[shift = {(0,-3)}]
+	 \node[AA] (A1) at (0,0) {};
+	\node at (1,0) {\huge $\star$};
+	\node[AA] (A2) at (2,0) {};
+	\node at (3,0) {\huge $=$};
+	\node[AA] (A3) at (4,0) {};
+	\node[AA] (A4) at (6,0) {};
+	\BlackBond{A3}{A4}
+\end{scope}
+\end{tikzpicture}
+\caption{}
+\end{figure}
+
+I thought I was starting to see the pattern, but then he showed me that a white and blue ball with $\star$ gives just a blue ball.  Then things
+started to get really weird, with new ball colors appearing with no immediately apparent pattern.  He showed me more images than I can readily
+reproduce without it becoming overwhelming.  
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+[   AA/.style={circle, ball color=red!75, minimum size=8mm, inner sep=0},
+BB/.style={circle, ball color=blue!75, minimum size=8mm, inner sep=0},
+CC/.style={circle, ball color=green!75, minimum size=8mm, inner sep=0}
+]
+
+\begin{scope}[shift = {(0,0)}]
+	\node[AA] (A3) at (0,0) {};
+	\node[AA] (A4) at (0,2) {};
+	\BlackBond{A3}{A4}
+\end{scope}
+
+\node at (1,1) {\huge $\dagger$};
+
+  \begin{scope}[shift = {(2,0)}]
+	\node[AA] (A3) at (0,0) {};
+	\node[BB] (A4) at (0,2) {};
+	\BlackBond{A3}{A4}
+\end{scope}
+
+\node at (3,1) {\huge $=$};
+	
+	  \begin{scope}[shift = {(4,0)}]
+	\node[AA] (A3) at (0,0) {};
+	\node[CC] (A4) at (0,2) {};
+	\BlackBond{A3}{A4}
+\end{scope}
+\end{tikzpicture}
+\caption{}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+[   
+Z1/.style={circle, ball color=gray!75, minimum size=8mm, inner sep=0},
+Z2/.style={circle, ball color=red!75, minimum size=8mm, inner sep=0},
+Z3/.style={circle, ball color=blue!75, minimum size=8mm, inner sep=0},
+Z5/.style={circle, ball color=green!75, minimum size=8mm, inner sep=0},
+Z7/.style={circle, ball color=yellow!75, minimum size=8mm, inner sep=0},
+Z11/.style={circle, ball color=cyan!75, minimum size=8mm, inner sep=0},
+Z13/.style={circle, ball color=magenta!75, minimum size=8mm, inner sep=0}
+]
+
+	  \begin{scope}[shift = {(0,0)}]
+	\node[Z2] (A3) at (0,0) {};
+	\node[Z5] (A4) at (0,2) {};
+	\BlackBond{A3}{A4}
+\end{scope}
+\node at (1,1) {\huge $\dagger$};
+
+  \begin{scope}[shift = {(2,0)}]
+	\node[Z1] (A3) at (0,1) {};
+
+\end{scope}
+
+\node at (3,1) {\huge $=$};
+
+  \begin{scope}[shift = {(4,0)}]
+	\node[Z11] (A3) at (0,1) {};
+\end{scope}
+
+\begin{scope}[shift = {(6,0)}]
+	  \begin{scope}[shift = {(0,0)}]
+	\node[Z5] (A4) at (0,1) {};
+\end{scope}
+\node at (1,1) {\huge $\dagger$};
+
+  \begin{scope}[shift = {(2,0)}]
+	\node[Z11] (A3) at (0,1) {};
+
+\end{scope}
+
+\node at (3,1) {\huge $=$};
+
+  \begin{scope}[shift = {(4,0)}]
+	\node[Z2] (A1) at (0,0) {};
+	\node[Z2] (A2) at (0,2) {};
+	\node[Z2] (A3) at (2,0) {};
+	\node[Z2] (A4) at (2,2) {};
+	\BlackBond{A1}{A3}
+	\BlackBond{A1}{A2}
+	\BlackBond{A4}{A2}
+	\BlackBond{A3}{A4}
+\end{scope}
+\end{scope}
+\end{tikzpicture}
+\end{figure}
+
+
+
+\section{Possible patterns?}
+
+After four or five more encounters with this being, I was starting to have some guesses at some basic rules he was trying to communicate through all these examples.
+Pressing the buttons appears to start some sort of reaction inside the machine that combines the two objects.  So, it makes sense to view $\star$ and $\dagger$ as binary operations.
+In all the examples I have seen, these operation have nice properties in that they are both associative and commutative.  Actually based on the complete structures, they are not quite commutative, but if we consider
+two objects the same if they have the same number of balls of each color, then the operations are commutative.  There is further structure in how the balls are connected by bars that
+does not behave commutatively, but I don't yet have enough information to even guess at how the operations work with this structure.  For now, I am going to call two objects the same if they have the same number of balls of each color.
+
+\begin{figure}
+\centering
+\begin{tabular}{l|l}
+$\dagger \text{ is associative}$ & $a\dagger(b\dagger c) = (a\dagger b) \dagger c$\\
+$\dagger \text{ is commutative}$ & $a \dagger b = b\dagger a$\\
+$\dagger \text{ is distributive}$ & $a\star (b \dagger c) = (a\star b)\dagger(a\star c)$\\
+$\star \text{ is associative}$ & $a\star(b\star c) = (a\star b) \star c$\\
+$\star \text{ is commutative}$ & $a \star b = b\star a$\\
+\end{tabular}
+\caption{Some plausible rules I will assume until proven wrong.}
+\end{figure} 
+
+
+\begin{definition}
+A \emph{ball sequence} is a sequence of natural numbers.  Each slot gives the number of balls of a given color in order 
+(\textcolor{gray}{white},\textcolor{red}{red},\textcolor{blue}{blue},\textcolor{green}{green},\textcolor{yellow}{yellow},\textcolor{cyan}{cyan},\textcolor{magenta}{magenta}, ...).
+Of course, these are just approximations of the colors I saw and there were many more.  We will add to the list as needed.
+\end{definition}
+
+\begin{conjecture}
+The only ball sequence with a white ball is $(1,0,0,0,\ldots)$.
+\end{conjecture}
+\begin{conjecture}
+The ball sequence $(1,0,0,0,\ldots)$ has no effect when using $\star$, that is $(1,0,0,0,\ldots) \star b = b$ for all ball sequences $b$.
+In the absence of white balls, $\star$ button just adds the values in each slot.  That is,
+\[(\textcolor{gray}{0},\textcolor{red}{a_2},\textcolor{blue}{a_3},\ldots) \star
+(\textcolor{gray}{0},\textcolor{red}{b_2},\textcolor{blue}{b_3}, \ldots) = (\textcolor{gray}{0},\textcolor{red}{a_2+b_2},\textcolor{blue}{a_3+b_3}, \ldots).\]  In particular, $\star$ never creates new colors.
+\end{conjecture}
+
+\section{The $\dagger$ button is sort of like nuclear fission}
+The $\dagger$ operation appears much more complicated than $\star$. I have seen applications of $\dagger$ produce many balls from just a few.  Figure \ref{ManyFromFew} shows an example of this.  It is almost as if the red balls are
+the simplest element and $\dagger$ breaks down cyan and yellow balls into many more red balls somehow.  I don't know how the machine is performing $\dagger$, but I have a conjecture
+as to what it is doing.  The idea doesn't account for the extra structural properties I mentioned before that make $\dagger$ not actually commutative.  But, if we forget about that extra
+structure for now, I think he might be showing me numbers, or rather factored numbers.  Here is the idea:  interpret the white ball as $1$, the red ball as $2$, the blue ball as $3$, the green ball
+as $5$, the yellow ball as $7$ and cyan ball as $11$.  Now the $\star$ operation is multiplication and $\dagger$ is addition.  Let me do it more formally.
+
+\begin{conjecture}
+The ball sequence $(1,0,0,\ldots)$ represents the number $1$.  A ball sequence $(0, a_1, a_2, a_3, a_4, a_5, \ldots)$ represents the number $2^{a_1}3^{a_2}5^{a_3}7^{a_4}11^{a_5}\cdots$.
+The $\star$ button multiplies the two numbers and the $\dagger$ button adds the two numbers.
+\end{conjecture}
+
+This works for all the demonstrations I can remember (disregarding the non-commutative structure).   I have seen massive objects put into the machine and the operations always seem to be instantaneous.  For a lot of these
+larger demonstrations, I don't remember the objects precisely, so I can't check the conjecture.  But if the conjecture is true and the machine is using some efficient physical operation to do $\dagger$, I think we could
+use the machine to do fast integer factorization.  The universe can factor efficiently using Shor's quantum algorithm, so maybe the machine is doing something similar?   I am working on trying to get the being to let me give 
+him objects to try in the machine, but no luck yet.  It would be rather amusing to break encryption by going into a deep meditative state and using this being's machine to factor integers.
+
+\begin{figure}\label{ManyFromFew}
+\centering
+\begin{tikzpicture}
+[   
+Z1/.style={circle, ball color=gray!75, minimum size=8mm, inner sep=0},
+Z2/.style={circle, ball color=red!75, minimum size=8mm, inner sep=0},
+Z3/.style={circle, ball color=blue!75, minimum size=8mm, inner sep=0},
+Z5/.style={circle, ball color=green!75, minimum size=8mm, inner sep=0},
+Z7/.style={circle, ball color=yellow!75, minimum size=8mm, inner sep=0},
+Z11/.style={circle, ball color=cyan!75, minimum size=8mm, inner sep=0},
+Z13/.style={circle, ball color=magenta!75, minimum size=8mm, inner sep=0}
+]
+
+	  \begin{scope}[shift = {(0,0)}]
+	\node[Z2] (A3) at (0,0) {};
+	\node[Z11] (A4) at (0,2) {};
+	\node[Z11] (A5) at (2,2) {};
+	\BlackBond{A3}{A4}
+	\BlackBond{A4}{A5}
+\end{scope}
+\node at (3,1) {\huge $\dagger$};
+
+  \begin{scope}[shift = {(5,0)}]
+	\node[Z2] (A3) at (0,0) {};
+	\node[Z7] (A4) at (0,2) {};
+	\BlackBond{A3}{A4}
+
+\end{scope}
+
+\node at (7,1) {\huge $=$};
+
+  \begin{scope}[shift = {(9,0)}]
+	\foreach \c in {1,...,4}
+    {  
+	    \node[Z2] (C\c) at ($(1,1)+((\c*90 - 45:1.5)$) {};
+		\node[Z2] (CW\c) at ($(1,1)+(\c*90:1.5)$) {};
+		\BlackBond{C\c}{CW\c}
+    }
+	\BlackBond{CW1}{C2}
+	\BlackBond{CW2}{C3}
+	\BlackBond{CW3}{C4}
+	\BlackBond{CW4}{C1}
+\end{scope}
+
+\end{tikzpicture}
+\caption{Some sort of splitting?}
+\end{figure}
+
+\section{The other buttons}
+The experiments he has shown me that use the $\gcd$ and $\lcm$ buttons appear to be doing greatest common divisor and least common multiple, respectively.  That is,
+assuming we really are dealing with factored integers here.  Figure \ref{greatestcommon} and Figure \ref{leastcommon} show examples of these.
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+[   
+Z1/.style={circle, ball color=gray!75, minimum size=8mm, inner sep=0},
+Z2/.style={circle, ball color=red!75, minimum size=8mm, inner sep=0},
+Z3/.style={circle, ball color=blue!75, minimum size=8mm, inner sep=0},
+Z5/.style={circle, ball color=green!75, minimum size=8mm, inner sep=0},
+Z7/.style={circle, ball color=yellow!75, minimum size=8mm, inner sep=0},
+Z11/.style={circle, ball color=cyan!75, minimum size=8mm, inner sep=0},
+Z13/.style={circle, ball color=magenta!75, minimum size=8mm, inner sep=0}
+]
+
+	  \begin{scope}[shift = {(0,0)}]
+	\node[Z2] (A3) at (0,0) {};
+	\node[Z11] (A4) at (0,2) {};
+	\node[Z11] (A5) at (2,2) {};
+	\BlackBond{A3}{A4}
+	\BlackBond{A4}{A5}
+\end{scope}
+\node at (3,1) {\huge $\gcd$};
+
+  \begin{scope}[shift = {(5,0)}]
+	\node[Z2] (A3) at (0,0) {};
+	\node[Z7] (A4) at (0,2) {};
+	\BlackBond{A3}{A4}
+
+\end{scope}
+
+\node at (7,1) {\huge $=$};
+
+  \begin{scope}[shift = {(9,0)}]
+	\node[Z2] (A3) at (0,1) {};
+\end{scope}
+\end{tikzpicture}
+\caption{greatest common divisor}
+\label{greatestcommon}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+[   
+Z1/.style={circle, ball color=gray!75, minimum size=8mm, inner sep=0},
+Z2/.style={circle, ball color=red!75, minimum size=8mm, inner sep=0},
+Z3/.style={circle, ball color=blue!75, minimum size=8mm, inner sep=0},
+Z5/.style={circle, ball color=green!75, minimum size=8mm, inner sep=0},
+Z7/.style={circle, ball color=yellow!75, minimum size=8mm, inner sep=0},
+Z11/.style={circle, ball color=cyan!75, minimum size=8mm, inner sep=0},
+Z13/.style={circle, ball color=magenta!75, minimum size=8mm, inner sep=0}
+]
+
+	  \begin{scope}[shift = {(0,0)}]
+	\node[Z2] (A3) at (0,0) {};
+	\node[Z11] (A4) at (0,2) {};
+	\node[Z11] (A5) at (2,2) {};
+	\BlackBond{A3}{A4}
+	\BlackBond{A4}{A5}
+\end{scope}
+\node at (3,1) {\huge $\lcm$};
+
+  \begin{scope}[shift = {(5,0)}]
+	\node[Z2] (A3) at (0,0) {};
+	\node[Z7] (A4) at (0,2) {};
+	\BlackBond{A3}{A4}
+
+\end{scope}
+
+\node at (7,1) {\huge $=$};
+
+  \begin{scope}[shift = {(9,0)}]
+		\node[Z2] (A3) at (0,0) {};
+	\node[Z11] (A4) at (0,2) {};
+	\node[Z11] (A5) at (2,2) {};
+	\node[Z7] (A7) at (2,0) {};
+	\BlackBond{A3}{A4}
+	\BlackBond{A4}{A5}
+	\BlackBond{A7}{A5}
+	\BlackBond{A7}{A3}
+\end{scope}
+\end{tikzpicture}
+\caption{least common multiple}
+\label{leastcommon}
+\end{figure}
+\section{What else could it be?}
+Still disregarding the non-commutative structure seen with $\dagger$ for now, is there something else this machine could be doing besides adding and multiplying factored integers?  
+I guess, clearly yes, since I have only seen finitely many examples, there are infinitely many binary operations I could make satisfy all the examples I've seen.  But are there
+other interesting/natural binary operations that do this?  I imagine operations on these ball sequences with similar properties have been studied before in different language.  
+Yeah, definitely, we are talking about commutative rings here.  Now the non-commutative nature of $\dagger$ needs more research.  My best guess is that when
+he pushes the $\dagger$ button, the machine is performing a binary operation in a larger non-commuatitive ring, the image of this operation in the projection down to the integers 
+is addition.  So, maybe the universe can do more than just factor efficiently.
+\end{document}
