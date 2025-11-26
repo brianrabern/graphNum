@@ -1,0 +1,50 @@
+/* React Flow global overrides - separate file to avoid CSS module :global() issues in production */
+
+/* React Flow node overrides */
+.react-flow__node {
+  background: transparent !important;
+  overflow: visible !important;
+}
+
+/* React Flow edge styling */
+.react-flow__edge-path {
+  stroke-width: 2 !important;
+  stroke: rgba(200, 150, 100, 0.4) !important;
+  opacity: 0.7 !important;
+  filter: drop-shadow(0 0 3px rgba(255, 180, 80, 0.3));
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: rgba(100, 180, 255, 0.9) !important;
+  stroke-width: 3 !important;
+  filter: drop-shadow(0 0 8px rgba(100, 180, 255, 0.6));
+}
+
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: rgba(255, 200, 120, 0.7) !important;
+  stroke-width: 2.5 !important;
+  filter: drop-shadow(0 0 5px rgba(255, 180, 80, 0.5));
+}
+
+/* React Flow controls styling */
+.react-flow__controls {
+  background: rgba(40, 30, 20, 0.8) !important;
+  border: 1px solid rgba(200, 150, 100, 0.4) !important;
+  backdrop-filter: blur(10px);
+}
+
+.react-flow__controls-button {
+  background: rgba(200, 150, 100, 0.2) !important;
+  border-bottom: 1px solid rgba(200, 150, 100, 0.3) !important;
+  color: #f5e6d3 !important;
+  transition: all 0.2s;
+}
+
+.react-flow__controls-button:hover {
+  background: rgba(255, 180, 80, 0.3) !important;
+  box-shadow: 0 0 10px rgba(255, 180, 80, 0.4);
+}
+
+.react-flow__background {
+  opacity: 0.2 !important;
+}

@@ -15,6 +15,7 @@ import ReactFlow, {
   Position,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
+import './GraphCanvas.global.css';
 import { Graph } from '../../core/graph/graphTypes';
 import { getColorValue } from '../../core/math/colorMapping';
 import styles from './GraphCanvas.module.css';
@@ -111,10 +112,26 @@ function ColorNode({ data }: { data: { color: string; label?: string } }) {
       <Handle
         type="source"
         position={Position.Right}
+        id="source"
+        style={{
+          width: 6,
+          height: 6,
+          borderRadius: '50%',
+          background: '#666',
+          border: '1px solid #444',
+        }}
       />
       <Handle
         type="target"
-        position={Position.Right}
+        position={Position.Left}
+        id="target"
+        style={{
+          width: 6,
+          height: 6,
+          borderRadius: '50%',
+          background: '#666',
+          border: '1px solid #444',
+        }}
       />
     </div>
   );
@@ -359,10 +376,10 @@ export function GraphCanvas({
         nodesDraggable={!isCanonical && !nonInteractive}
         nodesConnectable={!isCanonical && !nonInteractive}
         elementsSelectable={!isCanonical && !nonInteractive}
-        panOnDrag={!nonInteractive}
+        panOnDrag={[1, 2]}
         zoomOnScroll={!nonInteractive}
         zoomOnPinch={!nonInteractive}
-        connectionRadius={nonInteractive ? 0 : 30}
+        connectionRadius={nonInteractive ? 0 : 50}
         snapToGrid={false}
       >
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
